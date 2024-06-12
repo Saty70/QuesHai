@@ -1,5 +1,10 @@
 export const Courses = [
     {
+        course: "B.Tech - M.Tech. Computer Science & Engineering (Cyber Security)",
+        school: "Department of Cyber Security and Digital Forensics",
+        image: "https://via.placeholder.com/150"
+    },
+    {
         course: "LL. M. (Criminal Law and Criminal Justice Administration)",
         school: "Department of Law, Forensic Justice and Policy Studies",
         image: "https://via.placeholder.com/150"
@@ -11,11 +16,6 @@ export const Courses = [
     },
     {
         course: "M. Sc. Digital Forensics and Information Security",
-        school: "Department of Cyber Security and Digital Forensics",
-        image: "https://via.placeholder.com/150"
-    },
-    {
-        course: "B.Tech - M.Tech. Computer Science & Engineering (Cyber Security)",
         school: "Department of Cyber Security and Digital Forensics",
         image: "https://via.placeholder.com/150"
     },
