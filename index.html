@@ -1,32 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <title>Exam Hai</title>
-    <link rel="stylesheet" type="text/css" href="coursestyles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exam Hai — Thank You</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:       #0d0f12;
+      --surface:  #141720;
+      --border:   #252a38;
+      --border2:  #2e3448;
+      --text:     #d8dce8;
+      --dim:      #7a8099;
+      --faint:    #3e4460;
+      --accent:   #5b8af0;
+      --red:      #e05c5c;
+      --r:        6px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'IBM Plex Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+      overflow-x: hidden;
+    }
+
+    /* subtle noise */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999; opacity: .5;
+    }
+
+    /* top scan bar */
+    .scan {
+      position: fixed; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--accent) 50%, transparent 100%);
+      animation: scan 5s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes scan {
+      0%,100% { opacity: 0; transform: scaleX(.2); }
+      50%      { opacity: .6; transform: scaleX(1); }
+    }
+
+    /* card */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: clamp(40px, 8vw, 72px) clamp(32px, 7vw, 64px);
+      max-width: 560px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      animation: rise .7s ease both;
+    }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    /* glow behind card */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -100px; left: 50%; transform: translateX(-50%);
+      width: 400px; height: 300px;
+      background: radial-gradient(circle, rgba(91,138,240,.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* site name */
+    .site-name {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 40px;
+    }
+
+    /* big headline */
+    h1 {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(2.4rem, 8vw, 3.8rem);
+      font-weight: 600;
+      letter-spacing: -.025em;
+      line-height: 1.1;
+      color: #eef0f8;
+      margin-bottom: 10px;
+    }
+    h1 em {
+      display: block;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--accent);
+      font-size: .72em;
+      letter-spacing: -.01em;
+      margin-top: 4px;
+    }
+
+    /* divider */
+    .rule {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 32px 0;
+    }
+
+    /* body text */
+    .message {
+      font-size: 14.5px;
+      color: var(--dim);
+      line-height: 1.85;
+      font-weight: 300;
+      margin-bottom: 36px;
+    }
+
+    /* stopped badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(224,92,92,.08);
+      border: 1px solid rgba(224,92,92,.22);
+      border-radius: 100px;
+      padding: 9px 20px;
+      animation: pulse 2.6s ease-in-out infinite;
+    }
+    .badge .led {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 7px var(--red);
+      flex-shrink: 0;
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(224,92,92,0); }
+      50%      { box-shadow: 0 0 0 5px rgba(224,92,92,.1); }
+    }
+
+    /* footer line */
+    .footer {
+      margin-top: 48px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .1em;
+      color: var(--faint);
+      text-align: center;
+      font-style: italic;
+    }
+  </style>
 </head>
-
 <body>
-    <div class="main">
-        <div class="header">
-            <h1>Courses</h1>
-        </div>
-        <div class="content">
-            <ul id="course-list">
-                <!-- Course list will be generated dynamically with JavaScript -->
-            </ul>
-        </div>
-        <div class="footer">
-            <p>Satyam</p>
-        </div>
-    </div>
 
-    <script src="courseSelection.js"></script>
+<div class="scan"></div>
+
+<div class="card">
+  <div class="site-name">Exam Hai · by Satyam</div>
+
+  <h1>
+    Thank You
+    <em>for being here.</em>
+  </h1>
+
+  <hr class="rule" />
+
+  <p class="message">
+    This service has served its purpose and has now been retired.<br />
+    It was a pleasure building something useful for you.
+  </p>
+
+  <div class="badge">
+    <span class="led"></span>
+    Service Stopped
+  </div>
+</div>
+
+<div class="footer">good luck wherever you go next.</div>
+
 </body>
-
 </html>
